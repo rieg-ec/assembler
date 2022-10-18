@@ -47,6 +47,7 @@ module Assembler
           0
         end
       end.to_i.to_s(2).rjust(16, "0")
+
       "#{literal}#{selA}#{selB}#{enableA}#{enableB}#{selALU}#{w}#{loadPC}#{jmp}#{selAdd}#{incSP}#{decSP}#{selPC}#{selDin}"
     end
 

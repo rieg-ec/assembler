@@ -8,7 +8,6 @@ module Assembler
 
     def initialize(operand)
       @operand = operand
-      raise InvalidOperandError("#{@operand}") unless valid?
     end
 
     def to_i

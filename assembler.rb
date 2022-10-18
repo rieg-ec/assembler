@@ -5,7 +5,8 @@ if ARGV.length != 1
   exit
 end
 
-assembler = Assembler::Assembler.new(ARGV[0])
+assembly = File.read(ARGV[0])
+assembler = Assembler::Assembler.new(assembly)
 assembler.parse!
 
 opcodes = assembler.assemble

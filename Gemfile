@@ -11,4 +11,9 @@ gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
 
-gem 'forwardable'
+gem "forwardable"
+
+group :development do
+  gem "pry"
+  gem "rspec-file_fixtures", "~> 0.1.6"
+end
