@@ -1,7 +1,9 @@
+#!/usr/bin/env ruby
+
 require_relative "./lib/assembler"
 
-if ARGV.length != 1
-  puts "Usage: ruby assembler.rb <file.asm>"
+if ARGV.length != 2
+  puts "Usage: ruby assembler.rb <file.asm> <file.opcode>"
   exit
 end
 
@@ -11,4 +13,6 @@ assembler.parse!
 
 opcodes = assembler.assemble
 
-puts opcodes
+File.open(ARGV[1], "w") do |f|
+  f.write(opcodes)
+end
