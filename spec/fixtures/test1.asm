@@ -1,7 +1,9 @@
 DATA:
   a 10
           b        12 // comment
+var3 4
 CODE:
+  MOV A, (var3)
                 MOV A, (a)
   MOV B, (b)
   ADD A, B

@@ -182,7 +182,7 @@ RSpec.describe Assembler::Instruction do
     it "INC A" do
       instruction = described_class.new("INC", "A")
       expect(instruction.to_opcode).to eq(
-        "0" * 15 + '1' + "10011000000000000000"
+        "0" * 15 + "1" + "10011000000000000000"
       )
     end
 
@@ -210,7 +210,7 @@ RSpec.describe Assembler::Instruction do
     it "DEC A" do
       instruction = described_class.new("DEC", "A")
       expect(instruction.to_opcode).to eq(
-        "0" * 15 + '1' + "10011000100000000000"
+        "0" * 15 + "1" + "10011000100000000000"
       )
     end
 

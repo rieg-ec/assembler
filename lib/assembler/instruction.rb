@@ -11,9 +11,7 @@ module Assembler
 
     def initialize(mnemonic, first_operand = nil, second_operand = nil)
       unless ALLOWED_MNEMONICS.include?(mnemonic)
-        raise InvalidMnemonicError(
-          "#{mnemonic} #{first_operand} #{second_operand}"
-        )
+        raise InvalidMnemonicError, "#{mnemonic} #{first_operand} #{second_operand}"
       end
 
       @mnemonic = mnemonic

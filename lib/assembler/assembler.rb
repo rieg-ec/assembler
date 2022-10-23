@@ -55,7 +55,7 @@ module Assembler
         raise "Invalid data section" if line.split(" ").length != 2
 
         name, value = line.split(" ")
-        @variables[name] = value
+        @variables[name] = @ram_index
         @instructions << ["MOV", "A", value]
         @instructions << ["MOV", "(#{@ram_index})", "A"]
         @ram_index += 1
@@ -80,11 +80,12 @@ module Assembler
     end
 
     def replace_variable_with_value(operand)
-      if @variables.key?(operand)
-        @variables[operand]
-      else
-        operand
-      end
+      return nil if operand.nil?
+
+      memory_dir = operand.start_with?("(") && operand.end_with?(")")
+      operand = operand.gsub("(", "").gsub(")", "")
+      value = @variables.key?(operand) ? @variables[operand] : operand
+      memory_dir ? "(#{value})" : value
     end
   end
 end
