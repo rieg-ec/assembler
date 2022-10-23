@@ -4,6 +4,7 @@ require_relative "instruction"
 module Assembler
   class Assembler
     INCREMENT_SP = ("0" * 16 + "00000000000000001000").freeze
+    COMMENT_SYMBOL = "/".freeze
 
     attr_reader :instructions, :labels, :variables
 
@@ -38,14 +39,14 @@ module Assembler
     def split_and_clean_sections(data)
       data_section = data.split("CODE").first
                          .split("\n")
-                         .map { |line| line.split("#").first.strip }
-                         .reject { |line| line.strip.empty? }
                          .drop(1)
+                         .map { |line| line.split(COMMENT_SYMBOL).first&.strip }
+                         .reject { |line| line.nil? || line.strip.empty? }
       code_section = data.split("CODE").last
                          .split("\n")
-                         .map { |line| line.split("#").first.strip }
-                         .reject { |line| line.strip.empty? }
                          .drop(1)
+                         .map { |line| line.split(COMMENT_SYMBOL).first&.strip }
+                         .reject { |line| line.nil? || line.strip.empty? }
       [data_section, code_section]
     end
 

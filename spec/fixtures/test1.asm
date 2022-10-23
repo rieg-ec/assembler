@@ -1,12 +1,12 @@
 DATA:
   a 10
-          b        12 # comment
+          b        12 // comment
 CODE:
                 MOV A, (a)
   MOV B, (b)
   ADD A, B
   MOV (100), A
-  JMP label4 # second comment
+  JMP label4 // second comment
 label1:
   MOV A, 0
   JMP label2
