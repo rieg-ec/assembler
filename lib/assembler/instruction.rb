@@ -39,7 +39,9 @@ module Assembler
 
     def to_opcode
       literal = begin
-        if @first_operand.literal? || @first_operand.literal_ram_addres?
+        if (inc? || dec?) && @first_operand.A?
+          1
+        elsif @first_operand.literal? || @first_operand.literal_ram_addres?
           @first_operand
         elsif @second_operand.literal? || @second_operand.literal_ram_addres?
           @second_operand
