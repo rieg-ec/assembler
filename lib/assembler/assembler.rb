@@ -84,7 +84,7 @@ module Assembler
 
       memory_dir = operand.start_with?("(") && operand.end_with?(")")
       operand = operand.gsub("(", "").gsub(")", "")
-      value = @variables.key?(operand) ? @variables[operand] : operand
+      value = @variables.key?(operand) ? @variables[operand].to_s : operand
       memory_dir ? "(#{value})" : value
     end
   end
