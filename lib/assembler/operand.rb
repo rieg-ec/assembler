@@ -22,6 +22,8 @@ module Assembler
         operand.gsub("h", "").to_i(16)
       elsif operand.end_with?("d")
         operand.gsub("d", "").to_i(10)
+      elsif operand.start_with?("'") && operand.end_with?("'")
+        operand.gsub("'", "").ord
       else
         operand.to_i(10)
       end
@@ -41,6 +43,8 @@ module Assembler
         operand = operand[0..-2]
       elsif operand.end_with?("h")
         operand = operand[0..-2].to_i(16)
+      elsif operand.start_with?("'") && operand.end_with?("'")
+        operand = operand[1..-2].ord
       end
 
       !!Integer(operand, exception: false)
