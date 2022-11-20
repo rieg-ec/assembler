@@ -53,15 +53,39 @@ module Assembler
     def parse_data_section(data_section)
       data_section.each do |line|
         line = line.split(" ")
+        string = false
         if line.length == 1
+          # belongs to an array
           value = line.first
+        elsif line[1].start_with? "'"
+          # character
+          name, value = line
+          value = value.gsub("'", "").ord.to_s
+          @variables[name] = @ram_index
+        elsif line[1].start_with? '"'
+          # string
+          string = true
+          name, value = line
+          values = value.gsub('"', "").chars.map(&:ord).map(&:to_s)
+          values << 0.to_s
+          @variables[name] = @ram_index
         else
+          # integer
           name, value = line
           @variables[name] = @ram_index
         end
-        @instructions << ["MOV", "A", value]
-        @instructions << ["MOV", "(#{@ram_index})", "A"]
-        @ram_index += 1
+
+        if string
+          values.each do |value|
+            @instructions << ["MOV", "A", value]
+            @instructions << ["MOV", "(#{@ram_index})", "A"]
+            @ram_index += 1
+          end
+        else
+          @instructions << ["MOV", "A", value]
+          @instructions << ["MOV", "(#{@ram_index})", "A"]
+          @ram_index += 1
+        end
       end
     end
 
