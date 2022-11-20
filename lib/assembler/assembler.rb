@@ -52,10 +52,13 @@ module Assembler
 
     def parse_data_section(data_section)
       data_section.each do |line|
-        raise "Invalid data section" if line.split(" ").length != 2
-
-        name, value = line.split(" ")
-        @variables[name] = @ram_index
+        line = line.split(" ")
+        if line.length == 1
+          value = line.first
+        else
+          name, value = line
+          @variables[name] = @ram_index
+        end
         @instructions << ["MOV", "A", value]
         @instructions << ["MOV", "(#{@ram_index})", "A"]
         @ram_index += 1
