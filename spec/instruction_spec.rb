@@ -315,14 +315,14 @@ RSpec.describe Assembler::Instruction do
     it "POP A" do
       instruction = described_class.new("POP", "A")
       expect(instruction.to_opcode).to eq(
-        "0" * 16 + "00001000000000100000"
+        "0" * 16 + "00111000000000100000"
       )
     end
 
     it "POP B" do
       instruction = described_class.new("POP", "B")
       expect(instruction.to_opcode).to eq(
-        "0" * 16 + "00000100000000100000"
+        "0" * 16 + "00110100000000100000"
       )
     end
 

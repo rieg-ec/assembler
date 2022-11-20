@@ -82,7 +82,8 @@ module Assembler
             ((add? || sub? || and? || or? || xor?) && @second_operand.ram_address?) ||
             cmp? ||
             (inc? && @first_operand.indirect_B?) ||
-            (push? && @first_operand.B?)
+            (push? && @first_operand.B?) ||
+            pop?
         "11"
       else
         "00"
